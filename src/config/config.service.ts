@@ -4,7 +4,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { CONFIG_OPTIONS } from './constants';
 import { ConfigOptionsInternal } from './interfaces';
-
 /**
  * Service for getting environmental variables.
  *
@@ -19,14 +18,15 @@ export class ConfigService {
   private readonly envConfig: {};
 
   constructor(@Inject(CONFIG_OPTIONS) private options: ConfigOptionsInternal) {
+    const appRoot = require('app-root-path');
     this.options = {
       ...{
         folder: './',
-        projectRoot: '../../',
+        projectRoot: appRoot,
         defaults: {},
         overrides: {},
         generateConstants: false,
-        generateConstantsEnviroments: ['development'],
+        generateConstantsEnviroments: ['development', undefined],
         constantsOutputDir: './src/',
       },
       ...this.options,
@@ -89,17 +89,21 @@ export class ConfigService {
 
   generateTypes() {
     const typeFile = this._generateTypeFile();
+    const filePath = path.resolve(
+      __dirname,
+      this.options.projectRoot,
+      this.options.constantsOutputDir,
+      'config.constants.ts',
+    );
     try {
-      fs.writeFileSync(
-        path.resolve(
-          __dirname,
-          this.options.projectRoot,
-          this.options.constantsOutputDir,
-          'config.constants.ts',
-        ),
-        typeFile,
-        { encoding: 'utf8' },
-      );
+      const existingFile = fs.readFileSync(filePath, { encoding: 'utf8' });
+      if (existingFile === typeFile) return;
+    } catch (e) {
+      console.error(e);
+    }
+
+    try {
+      fs.writeFileSync(filePath, typeFile, { encoding: 'utf8' });
     } catch (e) {
       console.error(e);
     }

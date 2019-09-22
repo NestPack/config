@@ -20,6 +20,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: yarn
       - run: yarn test
+      - run: yarn build
       - run: |
           npm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
           npm publish
