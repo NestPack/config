@@ -7,12 +7,11 @@ on:
 
 jobs:
   build:
-    name: Test and Deploy
     runs-on: ubuntu-16.04
     strategy:
       matrix:
         node: [ '12' ]
-    name: Node ${{ matrix.node }} sample
+    name: test and deploy
     steps:
       - uses: actions/checkout@v1
       - name: Setup node
