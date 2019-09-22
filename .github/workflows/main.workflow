@@ -1,5 +1,8 @@
 workflow "Test and deploy on push" {
   on = "push"
+  branches = [
+      "master"
+  ]
   resolves = ["GitHub Action for npm"]
 }
 
