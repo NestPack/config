@@ -1,0 +1,18 @@
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        node: [ '12' ]
+    name: Node ${{ matrix.node }} sample
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install
+      - run: npm test
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
