@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-16.04
     strategy:
       matrix:
-        node: [ '12' ]
+        node: ['12']
     name: test and deploy
     steps:
       - uses: actions/checkout@v1
@@ -19,7 +19,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: npm install
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - run: npm test
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - run: npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
