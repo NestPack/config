@@ -22,6 +22,6 @@ jobs:
           yarn test
       - name: deploy
         run: |
-          npm public --access public
+          npm publish --access public
         env:
           CI: true
