@@ -1,0 +1,6 @@
+.github
+.gitignore
+.prettierrc
+nest-cli.json
+src/config/test
+src/config/**/*.spec.ts
