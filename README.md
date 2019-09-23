@@ -14,7 +14,9 @@ $ yarn add @nestpack/config
 
 ## Usage
 
-//TODO
+```
+
+```
 
 ## License
 

@@ -22,7 +22,7 @@ export class ConfigService {
     this.options = {
       ...{
         folder: './',
-        projectRoot: appRoot,
+        projectRoot: `${appRoot}`,
         defaults: {},
         overrides: {},
         generateConstants: false,

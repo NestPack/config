@@ -1,6 +1,6 @@
 {
   "name": "@nestpack/config",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Config module for NestJs projects",
   "author": "Harry Horton",
   "license": "MIT",
