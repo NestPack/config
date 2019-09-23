@@ -13,7 +13,8 @@ export interface ConfigOptions {
   /**
    * Path to project root.
    *
-   * Default assumes module located in ROOT/src/config
+   * Default attempts to get project root automatically. Only set if you're having issues.
+   * If using npm/yarn link, this value will need to be set.
    */
   projectRoot?: string;
 
@@ -32,8 +33,22 @@ export interface ConfigOptions {
    */
   constantsOutputDir?: string;
 
+  /**
+   * When true, the ConfigModule will create src/config.constants.ts
+   *
+   * This file will enable a developer to use autocompletion to discover available
+   * env variables.
+   *
+   * The variables are generated from what is found in the ENV file, the overrides, and the defaults.
+   */
   generateConstants?: boolean;
 
+  /**
+   * This options allows a developer to set which environments the constants will be generated in.
+   *
+   * Default: development, undefined
+   * undefined is used if no env environment is set.
+   */
   generateConstantsEnviroments?: string[];
 }
 
@@ -49,7 +64,8 @@ export interface ConfigOptionsInternal {
   /**
    * Path to project root.
    *
-   * Default assumes module located in ROOT/src/config
+   * Default attempts to get project root automatically. Only set if you're having issues.
+   * If using npm/yarn link, this value will need to be set.
    */
   projectRoot: string;
 
@@ -68,7 +84,21 @@ export interface ConfigOptionsInternal {
    */
   constantsOutputDir: string;
 
+  /**
+   * When true, the ConfigModule will create src/config.constants.ts
+   *
+   * This file will enable a developer to use autocompletion to discover available
+   * env variables.
+   *
+   * The variables are generated from what is found in the ENV file, the overrides, and the defaults.
+   */
   generateConstants: boolean;
 
+  /**
+   * This options allows a developer to set which environments the constants will be generated in.
+   *
+   * Default: development, undefined
+   * undefined is used if no env environment is set.
+   */
   generateConstantsEnviroments: string[];
 }

@@ -72,7 +72,7 @@ export class ConfigService {
   }
 
   /**
-   * Returns process env if set, otherwise .env file value
+   * Returns configuration value
    */
   get(key: string): any {
     // Must check this specifically to override process value
@@ -99,7 +99,7 @@ export class ConfigService {
       const existingFile = fs.readFileSync(filePath, { encoding: 'utf8' });
       if (existingFile === typeFile) return;
     } catch (e) {
-      console.error(e);
+      // console.error(e);
     }
 
     try {
