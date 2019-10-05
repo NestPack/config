@@ -1,4 +1,4 @@
-import { Module, DynamicModule, Logger } from '@nestjs/common';
+import { Module, DynamicModule, Logger, Global } from '@nestjs/common';
 import { ConfigService } from './config.service';
 import { ConfigOptions } from './interfaces';
 import { CONFIG_OPTIONS } from './constants';
@@ -20,6 +20,7 @@ import { CONFIG_OPTIONS } from './constants';
  *
  * `<PROJECT_ROOT>/.`
  */
+@Global()
 @Module({
   providers: [ConfigService],
 })
