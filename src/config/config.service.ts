@@ -1,9 +1,9 @@
-import { Injectable, Inject, Logger } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
 import { CONFIG_OPTIONS } from './constants';
-import { ConfigOptionsInternal } from './interfaces';
+import { ConfigOptions } from './interfaces';
 /**
  * Service for getting environmental variables.
  *
@@ -17,7 +17,7 @@ import { ConfigOptionsInternal } from './interfaces';
 export class ConfigService {
   private readonly envConfig: {};
 
-  constructor(@Inject(CONFIG_OPTIONS) private options: ConfigOptionsInternal) {
+  constructor(@Inject(CONFIG_OPTIONS) private options: ConfigOptions = {}) {
     const appRoot = require('app-root-path');
     this.options = {
       ...{

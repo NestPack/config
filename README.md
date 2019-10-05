@@ -182,6 +182,14 @@ export class AppController {
 
 ## Common Problems
 
+### Using outside of module system
+
+For injecting settings into setup functions or dynamic modules at application start, the module system is not yet available to provide `ConfigService`.
+
+To solve this problem, simply call `new ConfigService()` anywhere in your project, and you can get environmental variables the same way. This is useful for setup steps like setting up the database.
+
+Be aware that you shouldn't pass options to generate constants here, or else that functionality will run each time the service is initialized.
+
 ### NPM/Yarn Link
 
 When using this package with NPM link, the `projectRoot` option will need to be set as the package cannot automatically determine the location under that scenario.

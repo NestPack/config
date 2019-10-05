@@ -136,4 +136,13 @@ export const CONFIG = {
 }
 `);
   });
+
+  it('should allow ConfigService outside of module injection system', () => {
+    const service = new ConfigService({
+      projectRoot: './test/development-env',
+    });
+
+    const result = service.get('VAR');
+    expect(result).toBe('hellodev');
+  });
 });
