@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigService } from './config.service';
 import { ConfigModule } from './config.module';
+import { Module, Injectable } from '@nestjs/common';
 
 describe('ConfigModule', () => {
   it('should be defined', async () => {
@@ -144,5 +145,29 @@ export const CONFIG = {
 
     const result = service.get('VAR');
     expect(result).toBe('hellodev');
+  });
+
+  it('should make ConfigModule global', async () => {
+    @Injectable()
+    class ChildService {
+      constructor(private readonly configService: ConfigService) {}
+      getVar(name: string) {
+        return this.configService.get(name);
+      }
+    }
+    @Module({ providers: [ChildService] })
+    class ChildModule {}
+
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [
+        ConfigModule.register({
+          projectRoot: './test/development-env',
+        }),
+        ChildModule,
+      ],
+    }).compile();
+
+    const childService = module.get<ChildService>(ChildService);
+    expect(childService.getVar('VAR')).toBe('hellodev');
   });
 });
